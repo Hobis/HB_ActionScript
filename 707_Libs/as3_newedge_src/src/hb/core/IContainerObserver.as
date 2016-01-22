@@ -1,8 +1,10 @@
 /**
 	@Name: IContainerObserver
 	@Author: HobisJung(jhb0b@naver.com)
-	@Blog: http://blog.naver.com/jhb0b
-	@Date: 2013-04-17
+	@Date: 2016-01-20
+	@Comment:
+	{
+	}
 */
 package hb.core
 {
@@ -12,9 +14,5 @@ package hb.core
 	public interface IContainerObserver
 	{
 		function get_container():DisplayObjectContainer;
-		//function set_container(container:DisplayObjectContainer):void;
-
-		function get_name():String;
-		function set_name(name:String):void;
 	}
 }

@@ -1,179 +1,167 @@
 ﻿/**
 	@Name: PanelLayer 선택하는 로직 단순화
-	@Author: HobisJung
-	@Date: 2013-08-29
+	@Author: HobisJung(jhb0b@naver.com)
+	@Date: 2016-01-22
 	@Comment:
-	{
-	}
-	@Using:
 	{
 	}
 */
 package hb.useful
 {
 	import flash.display.DisplayObject;
-	import flash.display.MovieClip;
+	import flash.display.DisplayObjectContainer;
+	import hb.core.IContainerObserver;
+	import hb.core.IDisposable;
 	import hb.utils.DisplayObjectContainerUtil;
-	import hb.utils.StringUtil;
+	import hb.utils.StringUtil;	
 	
-
-	public final class PanelLayer
+	//
+	// #
+	public class PanelLayer implements IContainerObserver, IDisposable
 	{
-		// :: 생성자
-		public function PanelLayer(cont:MovieClip, searchStr:String):void
+		public static const CT_INIT:String = 'contentInit';
+		//
+		public static const CT_CLOSE:String = 'contentClose';
+		public static const CT_OPEN:String = 'contentOpen';	
+		//
+
+		
+		// ::
+		public function dispose():void
 		{
-			this.m_cont = cont;
-			this.m_searchStr = searchStr;
-			this.m_panelLen = 0;
-			DisplayObjectContainerUtil.contLoop(this.m_cont, searchStr, this.p_contLoop);
+			if (this._cont == null) return;
+			this._cont = null;
+			this._searchStr = null;
+			this._callBack = null;
+			this._now = null;
+			this._cont = null;
+		}		
+		
+		// :: 생성자
+		public function PanelLayer(cont:DisplayObjectContainer, searchStr:String, callBack:Function):void
+		{
+			this._cont = cont;
+			this._searchStr = searchStr;
+			this._callBack = callBack;
+			this._panelLen = 0;
+			//
+			DisplayObjectContainerUtil.contLoop(this._cont, searchStr, this.p_contLoop);
 		}
 
-		// :: 아이템들 반환
-		public function get_cont():MovieClip
+		// - 아이템들
+		private var _cont:DisplayObjectContainer = null;
+		public function get_container():DisplayObjectContainer
 		{
-			return this.m_cont;
+			return this._cont;
 		}
-		// :: 아이템들
-		private var m_cont:MovieClip = null;
 		
-		// :: 검색문자 반환
+		// - 검색문자
+		private var _searchStr:String = null;
 		public function get_searchStr():String
 		{
-			return this.m_searchStr;
-		}
-		// :: 검색문자
-		private var m_searchStr:String = null;
+			return this._searchStr;
+		}		
+		
+		// -
+		private var _callBack:Function = null;
+		public function dispatch_callBack(eObj:Object):void
+		{
+			if (_callBack == null) return;
+			_callBack(eObj);
+		}		
+
 		
 		// :: 검색후 아이템 설정
 		private function p_contLoop(cdo:DisplayObject, index:int):void
 		{
-			var t_mc:MovieClip = cdo as MovieClip;
-			if (t_mc != null)
-			{				
-				try
-				{
-					t_mc.d_close();
-				}
-				catch (e:Error)
-				{
-					t_mc.visible = false;
-				}
-				
-				try
-				{
-					t_mc.d_pause();
-				}
-				catch (e:Error) {}
-				
-				this.m_panelLen++;
-			}
+			this.dispatch_callBack(
+			{
+				type: CT_INIT, now: cdo
+			});
+			//
+			this._panelLen++;
 		}
 		
-		// - 패널 개수 반환
+		// - 패널 개수
+		private var _panelLen:uint;
 		public function get_panelLen():uint
 		{
-			return this.m_panelLen;
+			return this._panelLen;
 		}
-		// - 패널 개수
-		private var m_panelLen:uint;
 
 		// :: 선택 해제
 		public function unselect():void
 		{
-			if (this.m_nowPanel != null)
+			if (this._now != null)
 			{
-				try
+				this.dispatch_callBack(
 				{
-					this.m_nowPanel.d_close();
-				}
-				catch (e:Error)
-				{
-					this.m_nowPanel.visible = false;
-				}
-				
-				try
-				{
-					this.m_nowPanel.d_pause();
-				}
-				catch (e:Error) {}
-				
-				try
-				{
-					this.m_nowPanel.d_reset();
-				}
-				catch (e:Error) {}
-				
-				this.m_nowPanel = null;
+					type: CT_CLOSE, now: this._now
+				});
+				//
+				this._now = null;
 			}
 		}
 
 		// :: 선택
 		public function select(num:int):void
 		{
-			var t_nowPanel:MovieClip = this.m_cont[this.m_searchStr + num];
-			if (t_nowPanel != null)
+			var t_now:DisplayObject = this._cont[this._searchStr + num];
+			if (t_now != null)
 			{
-				if (t_nowPanel != this.m_nowPanel)
+				if (t_now != this._now)
 				{
 					this.unselect();
-					
-					this.m_nowPanel = t_nowPanel;					
-					try
+					//
+					this._now = t_now;
+					//
+					this.dispatch_callBack(
 					{
-						this.m_nowPanel.d_resume();
-					}
-					catch (e:Error) {}
-					
-					try
-					{
-						this.m_nowPanel.d_open();
-					}
-					catch (e:Error)
-					{
-						this.m_nowPanel.visible = true;
-					}
+						type: CT_OPEN, now: this._now
+					});
 				}
 			}
 		}
 		
 		// - 현재 선택중인 패널 번호 반환
-		public function get_nowPanelNum():int
+		public function get_nowNum():int
 		{
 			var t_num:int = -1;
 			
-			if (this.m_nowPanel != null)
+			if (this._now != null)
 			{
-				t_num = StringUtil.get_lastNum(this.m_nowPanel.name);
+				t_num = StringUtil.get_lastNum(this._now.name);
 			}
 			
 			return t_num;
 		}
-		// - 현재 선택중인 패널 반환
-		public function get_nowPanel():MovieClip
-		{
-			return this.m_nowPanel;
-		}
-		// - 현재 선택중인 패널
-		private var m_nowPanel:MovieClip = null;
 		
+		// - 현재 선택중인 패널
+		private var _now:DisplayObject = null;
+		public function get_now():DisplayObject
+		{
+			return this._now;
+		}
 		
 		// :: 이전 패널 활성화
 		public function prev():void
 		{
-			if (this.m_nowPanel != null)
+			if (this._now != null)
 			{
-				var t_num:int = StringUtil.get_lastNum(this.m_nowPanel.name);
+				var t_num:int = StringUtil.get_lastNum(this._now.name);
 				this.select(t_num - 1);
 			}
 		}		
 		// :: 다음 패널 활성화
 		public function next():void
 		{
-			if (this.m_nowPanel != null)
+			if (this._now != null)
 			{
-				var t_num:int = StringUtil.get_lastNum(this.m_nowPanel.name);
+				var t_num:int = StringUtil.get_lastNum(this._now.name);
 				this.select(t_num + 1);
 			}			
 		}
+		//}}}
+		////////////////////////////////////////////////////////////////////////////////////////////////////
 	}
 }

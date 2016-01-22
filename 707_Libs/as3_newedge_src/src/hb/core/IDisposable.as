@@ -1,7 +1,7 @@
 /**
-	@Name: IObjCore
+	@Name: IDisposable
 	@Author: HobisJung(jhb0b@naver.com)
-	@Date: 2013-04-17
+	@Date: 2016-01-20
 	@Comment:
 	{
 	}

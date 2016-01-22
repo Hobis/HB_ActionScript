@@ -13,7 +13,7 @@ package hbworks.uilogics
 	import flash.events.EventDispatcher;
 	import flash.events.MouseEvent;
 	import flash.utils.Dictionary;
-	import hb.utils.DebugUtil;
+	import hb.tools.DebugTool;
 	import hb.utils.StringUtil;
 	import hbworks.uilogics.ButtonLogic;
 	import hbworks.uilogics.events.CheckListEvent;

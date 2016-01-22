@@ -8,7 +8,7 @@
  */
 package hbworks.uilogics
 {
-	import hb.utils.DebugUtil;
+	import hb.tools.DebugTool;
 
 	import hbworks.uilogics.events.SliderLogicEvent;
 	import hbworks.uilogics.core.ISliderLogic;

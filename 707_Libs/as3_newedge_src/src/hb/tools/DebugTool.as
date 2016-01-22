@@ -6,14 +6,14 @@
 	{
 	}
 */
-package hb.utils
+package hb.tools
 {
 	import flash.system.Capabilities;
 
 	// #
-	public final class DebugUtil
+	public final class DebugTool
 	{
-		public function DebugUtil()
+		public function DebugTool()
 		{
 		}		
 

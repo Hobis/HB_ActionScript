@@ -10,11 +10,12 @@ package hb.frame
 {
 	import flash.display.Sprite;
 	import flash.events.Event;
-	import hb.core.IClassCore;
+	import hb.core.ICallBack;
+	import hb.core.IDisposable;
 	
 	//
 	// #
-	public class FPSTimer implements IClassCore
+	public class FPSTimer implements ICallBack, IDisposable
 	{
 		//
 		//

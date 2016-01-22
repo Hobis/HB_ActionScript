@@ -37,7 +37,7 @@ package hbworks.uilogics
 	import flash.display.DisplayObjectContainer;
 	import flash.display.Sprite;
 	import flash.events.MouseEvent;
-	import hb.utils.DebugUtil;
+	import hb.tools.DebugTool;
 	import hbworks.uilogics.events.SliderLogicEvent;
 	import hbworks.uilogics.core.IUILogic;
 	import hbworks.uilogics.core.ISliderLogic;

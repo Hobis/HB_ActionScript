@@ -6,7 +6,7 @@
 	{
 	}
 */
-package hb.utils
+package hb.tools
 {
 	public final class GeomTool
 	{

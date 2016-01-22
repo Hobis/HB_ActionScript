@@ -1,7 +1,7 @@
 /**
 	@Name: CountTask 넘버 카운팅 하기
-	@Author: HobisJung
-	@Date: 2013-12-09
+	@Author: HobisJung(jhb0b@naver.com)
+	@Date: 2016-01-22
 	@Comment:
 	{
 	}
@@ -11,65 +11,61 @@
 */
 package hb.useful
 {
-	public final class CountTask
+	public class CountTask
 	{
 		// :: 생성자
 		public function CountTask(countBegin:uint, countEnd:uint, plusValue:uint = 1):void
 		{
-			this.m_countBegin = countBegin;
-			this.m_countEnd = countEnd;
-			this.m_count = this.m_countBegin;
-			this.m_plusValue = plusValue;
+			this._countBegin = countBegin;
+			this._countEnd = countEnd;
+			this._count = this._countBegin;
+			this._plusValue = plusValue;
 		}
 
-		// :: 카운트 엔드
+		// - 카운트 시작
+		private var _countBegin:uint;
 		public function get_countBegin():uint
 		{
-			return this.m_countBegin;
+			return this._countBegin;
 		}
-		// - 카운트 시작
-		private var m_countBegin:uint;
 
-		// :: 카운트 엔드
+		// - 카운트 엔드
+		private var _countEnd:uint;
 		public function get_countEnd():uint
 		{
-			return this.m_countEnd;
+			return this._countEnd;
 		}
-		// - 카운트 엔드
-		private var m_countEnd:uint;
 
-		// :: 카운트
+		// - 카운트
+		private var _count:uint;
 		public function get_count():uint
 		{
-			return this.m_count;
+			return this._count;
 		}
-		// - 카운트
-		private var m_count:uint;
 
-		// :: 증가값 반환
+		// - 증가값
+		private var _plusValue:uint;
 		public function get_plusValue():uint
 		{
-			return this.m_plusValue;
+			return this._plusValue;
 		}
-		// - 증가값
-		private var m_plusValue:uint;
 
 
 		// :: 리셋
 		public function reset():void
 		{
-			this.m_count = this.m_countBegin;
+			this._count = this._countBegin;
 		}
 
 		// :: 다음 계산
-		public function isLast():Boolean
+		public function is_last():Boolean
 		{
 			var t_rv:Boolean = false;
 
-			if (this.m_count < this.m_countEnd)
+			if (this._count < this._countEnd)
 			{
-				this.m_count += this.m_plusValue;
-				if (this.m_count >= this.m_countEnd)
+				this._count += this._plusValue;
+				if (this._count >= this._countEnd)
 				{
 					t_rv = true;
 				}
@@ -79,10 +75,10 @@ package hb.useful
 				t_rv = true;
 			}
 
-			//trace('this.m_countBegin: ' + this.m_countBegin);
-			//trace('this.m_countEnd: ' + this.m_countEnd);
-			//trace('this.m_count: ' + this.m_count);
-			//trace('this.m_plusValue: ' + this.m_plusValue);
+			//trace('this._countBegin: ' + this._countBegin);
+			//trace('this._countEnd: ' + this._countEnd);
+			//trace('this._count: ' + this._count);
+			//trace('this._plusValue: ' + this._plusValue);
 
 			return t_rv;
 		}

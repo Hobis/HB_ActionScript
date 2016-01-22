@@ -14,7 +14,7 @@ package hbworks.uilogics
 	import flash.events.MouseEvent;
 	import flash.net.URLRequest;
 	import flash.utils.Dictionary;
-	import hb.utils.DebugUtil;
+	import hb.tools.DebugTool;
 	import hbworks.uilogics.ButtonLogic;
 	import hbworks.uilogics.core.LogicCore;
 	import hbworks.uilogics.events.ThumbListLogicEvent;

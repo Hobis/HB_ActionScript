@@ -48,7 +48,7 @@ package hb.utils
 	import flash.utils.setTimeout;
 	import flash.utils.clearTimeout;
 	import flash.system.Security;
-	import hb.utils.DebugUtil;
+	import hb.tools.DebugTool;
 
 	public final class ExternalUtil
 	{
@@ -115,7 +115,7 @@ package hb.utils
 		{
 			if (!IS_IN_BROWSER)
 			{
-				DebugUtil.test('ExternalUtil : Not In Browser');
+				DebugTool.test('ExternalUtil : Not In Browser');
 				return;
 			}
 
@@ -154,7 +154,7 @@ package hb.utils
 		{
 			if (!IS_IN_BROWSER)
 			{
-				DebugUtil.test('ExternalUtil : Not In Browser');
+				DebugTool.test('ExternalUtil : Not In Browser');
 				return;
 			}
 
@@ -165,7 +165,7 @@ package hb.utils
 		{
 			if (!IS_IN_BROWSER)
 			{
-				DebugUtil.test('ExternalUtil : Not In Browser');
+				DebugTool.test('ExternalUtil : Not In Browser');
 				return;
 			}
 
@@ -182,7 +182,7 @@ package hb.utils
 		{
 			if (!IS_IN_BROWSER)
 			{
-				DebugUtil.test('ExternalUtil : Not In Browser');
+				DebugTool.test('ExternalUtil : Not In Browser');
 				return;
 			}
 

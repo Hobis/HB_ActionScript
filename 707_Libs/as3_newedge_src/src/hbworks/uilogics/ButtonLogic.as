@@ -45,7 +45,7 @@ package hbworks.uilogics
 	import flash.display.MovieClip;
 	import flash.events.EventDispatcher;
 	import flash.events.MouseEvent;
-	import hb.utils.DebugUtil;
+	import hb.tools.DebugTool;
 	import hb.utils.StringUtil;
 
 	public class ButtonLogic extends EventDispatcher

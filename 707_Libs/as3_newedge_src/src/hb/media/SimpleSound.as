@@ -52,7 +52,7 @@ package hb.media
 
 	import hb.media.core.IPlayer;
 	import hb.media.events.SimpleSoundEvent;
-	import hb.utils.DebugUtil;
+	import hb.tools.DebugTool;
 
 
 	public class SimpleSound extends EventDispatcher implements IPlayer
@@ -162,9 +162,9 @@ package hb.media
 		private static function p_trace_msg(type:String):void
 		{
 			if (type == 'NoStream')
-				DebugUtil.test('열려있는 스트림이 없습니다.');
+				DebugTool.test('열려있는 스트림이 없습니다.');
 			else if (type == 'OpendStream')
-				DebugUtil.test('스트림이 이미 열려 있습니다.');
+				DebugTool.test('스트림이 이미 열려 있습니다.');
 		}
 		////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

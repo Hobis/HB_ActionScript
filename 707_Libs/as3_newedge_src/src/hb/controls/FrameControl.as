@@ -10,10 +10,11 @@ package hb.controls
 {
 	import flash.events.Event;
 	import flash.display.MovieClip;
-	import hb.core.IClassCore;
+	import hb.core.ICallBack;
+	import hb.core.IDisposable;
 	
 	//
-	public class FrameControl implements IClassCore
+	public class FrameControl implements ICallBack, IDisposable
 	{
 		////////////////////////////////////////////////////////////////////////////////////////////////////
 		//{{{ Implements

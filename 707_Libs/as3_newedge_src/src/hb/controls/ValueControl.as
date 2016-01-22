@@ -9,10 +9,11 @@
 package hb.controls
 {
 	import flash.events.Event;
-	import hb.core.IClassCore;
+	import hb.core.ICallBack;
+	import hb.core.IDisposable;
 
 	//
-	public class ValueControl implements IClassCore
+	public class ValueControl implements ICallBack, IDisposable
 	{
 		////////////////////////////////////////////////////////////////////////////////////////////////////
 		//{{{ Implements

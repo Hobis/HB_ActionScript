@@ -1,8 +1,10 @@
 /**
 	@Name: StartStop Interface
 	@Author: HobisJung(jhb0b@naver.com)
-	@Blog: http://blog.naver.com/jhb0b
-	@Date: 2013-04-17
+	@Date: 2016-01-20
+	@Comment:
+	{
+	}
 */
 package hb.core
 {

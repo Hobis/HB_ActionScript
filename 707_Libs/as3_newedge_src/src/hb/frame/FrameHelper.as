@@ -10,12 +10,13 @@ package hb.frame
 {
 	import flash.display.MovieClip;
 	import flash.events.Event;
-	import hb.core.IClassCore;
+	import hb.core.ICallBack;
+	import hb.core.IDisposable;
 	import hb.utils.MovieClipUtil;
 	
 	//
 	// #
-	public class FrameHelper implements IClassCore
+	public class FrameHelper implements ICallBack, IDisposable
 	{
 		//
 		//

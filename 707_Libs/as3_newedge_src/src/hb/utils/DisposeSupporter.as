@@ -45,7 +45,7 @@ package hb.utils
 	import flash.system.System;
 	import flash.net.LocalConnection;
 	import flash.utils.ByteArray;
-	import hb.utils.DebugUtil;
+	import hb.tools.DebugTool;
 
 	public final class DisposeSupporter
 	{
@@ -265,7 +265,7 @@ package hb.utils
 				}
 
 				if (isCautionTrace)
-					DebugUtil.test('System.gc Call~!');
+					DebugTool.test('System.gc Call~!');
 			}
 			else
 			{
@@ -279,7 +279,7 @@ package hb.utils
 				}
 
 				if (isCautionTrace)
-					DebugUtil.test('LocalConnection Create');
+					DebugTool.test('LocalConnection Create');
 			}
 
 			//DebugUtil.test('gc');

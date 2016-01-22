@@ -41,7 +41,7 @@ package hb.media
 	import hb.media.core.IPlayer;
 	import hb.media.events.SimpleVideoEvent;
 	import hb.media.subClasses.SimpleVideoStates;
-	import hb.utils.DebugUtil;
+	import hb.tools.DebugTool;
 
 	public final class SimpleVideo extends EventDispatcher implements IPlayer
 	{
@@ -167,12 +167,12 @@ package hb.media
 			t_nc.addEventListener(NetStatusEvent.NET_STATUS,
 				function(event:NetStatusEvent):void
 				{
-					DebugUtil.test(event.type);
+					DebugTool.test(event.type);
 				});
 			t_nc.addEventListener(SecurityErrorEvent.SECURITY_ERROR,
 				function(event:SecurityErrorEvent):void
 				{
-					DebugUtil.test(event.type);
+					DebugTool.test(event.type);
 				});
 			t_nc.connect(null);
 
@@ -241,7 +241,7 @@ package hb.media
 			}
 			else
 			{
-				DebugUtil.test('close로 열린 스트림을 닫아주세요.');
+				DebugTool.test('close로 열린 스트림을 닫아주세요.');
 			}
 
 			//DebugUtil.test('load');
