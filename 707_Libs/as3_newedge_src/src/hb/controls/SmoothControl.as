@@ -92,8 +92,7 @@ package hb.controls
 		public function set_speed(v:Number):void
 		{
 			this._speed = v;
-		}
-		
+		}		
 		
 		// ::
 		private function p_enterFrame(event:Event):void
@@ -141,7 +140,20 @@ package hb.controls
 		public function stop():void
 		{
 			ControlsProxy.useSprite.removeEventListener(Event.ENTER_FRAME, this.p_enterFrame);
-		}		
+		}
+
+		
+		// ::
+		public function is_end():Boolean
+		{
+			if (_nowValue == _endValue) {
+				return true;
+			}
+			else {
+				return false;
+			}
+		}
+		
 		//}}}
 		////////////////////////////////////////////////////////////////////////////////////////////////////
 	}

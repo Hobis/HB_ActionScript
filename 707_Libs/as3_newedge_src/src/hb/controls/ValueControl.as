@@ -184,6 +184,18 @@ package hb.controls
 		{
 			ControlsProxy.useSprite.removeEventListener(Event.ENTER_FRAME, this.p_enterFrame);
 		}
+		
+		// ::
+		public function is_end():Boolean
+		{
+			if (_nowValue == _endValue) {
+				return true;
+			}
+			else {
+				return false;
+			}
+		}
+		
 		//}}}
 		////////////////////////////////////////////////////////////////////////////////////////////////////
 		

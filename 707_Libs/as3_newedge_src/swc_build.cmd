@@ -1,0 +1,3 @@
+REM SWC Making...
+..\..\..\..\HB_Framework\bin\compc -output .\bin\hb_newedge_160217.swc -include-sources .\src
+PAUSE

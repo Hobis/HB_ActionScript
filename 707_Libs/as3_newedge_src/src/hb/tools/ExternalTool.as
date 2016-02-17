@@ -1,5 +1,5 @@
 /**
-	@Name: ExternalUtil Ver 1.02
+	@Name: ExternalTool
 	@Author: HobisJung(jhb0b@naver.com)
 	@Date: 2016-01-22
 	@Comment:
@@ -39,7 +39,7 @@
 		);
 	}
 */
-package hb.utils
+package hb.tools
 {
 	import flash.system.Capabilities;
 	import flash.external.ExternalInterface;
@@ -50,12 +50,34 @@ package hb.utils
 	import flash.system.Security;
 	import hb.tools.DebugTool;
 
-	public final class ExternalUtil
+	public final class ExternalTool
 	{
-		public function ExternalUtil()
+		public function ExternalTool()
 		{
 		}
 
+		
+
+
+		/*
+		DebugUtil.test(Security.sandboxType);
+		DebugUtil.test(Security.sandboxType == Security.LOCAL_TRUSTED);
+		DebugUtil.test(Security.sandboxType == Security.LOCAL_WITH_FILE);
+		DebugUtil.test(Security.sandboxType == Security.LOCAL_WITH_NETWORK);
+		DebugUtil.test(Security.sandboxType == Security.REMOTE);*/
+		//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		// -
+		private static var __delayId:int = -1;
+
+		// -
+		public static var delayNum:uint = 100;
+
+		// - Use ExternalInterface
+		public static var use_ei:Boolean = true;
+
+		// -
+		public static const IS_IN_BROWSER:Boolean = is_inBrowser();
+		
 		private static function p_toURL(s:String, target:String):void
 		{
 /*			if (Security.sandboxType == Security.LOCAL_TRUSTED)
@@ -119,7 +141,7 @@ package hb.utils
 				return;
 			}
 
-			if (useEI && ExternalInterface.available)
+			if (use_ei && ExternalInterface.available)
 			{
 				ExternalInterface.call(method, args);
 			}
@@ -161,7 +183,7 @@ package hb.utils
 			p_toURL(str, target);
 		}
 
-		public static function methodRegister(str:String, callObj:Object = null, target:String = '_self'):void
+		public static function add_method(str:String, callObj:Object = null, target:String = '_self'):void
 		{
 			if (!IS_IN_BROWSER)
 			{
@@ -178,7 +200,7 @@ package hb.utils
 			}
 		}
 
-		public static function methodDelete(method:String):void
+		public static function remove_method(method:String):void
 		{
 			if (!IS_IN_BROWSER)
 			{
@@ -188,23 +210,6 @@ package hb.utils
 
 			p_toURL('void(window.' + method + ' = null);', '_self');
 		}
-
-
-		/*
-		DebugUtil.test(Security.sandboxType);
-		DebugUtil.test(Security.sandboxType == Security.LOCAL_TRUSTED);
-		DebugUtil.test(Security.sandboxType == Security.LOCAL_WITH_FILE);
-		DebugUtil.test(Security.sandboxType == Security.LOCAL_WITH_NETWORK);
-		DebugUtil.test(Security.sandboxType == Security.REMOTE);*/
-		//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		private static var __delayId:int = -1;
-
-		public static var delayNum:uint = 100;
-
-		// :: Is ExternalInterface Use
-		public static var useEI:Boolean = true;
-
-		public static const IS_IN_BROWSER:Boolean = is_inBrowser();
 
 	}
 
