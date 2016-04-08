@@ -1,3 +1,5 @@
+@ECHO OFF
 REM SWC Making...
-..\..\..\..\HB_Framework\bin\compc -output .\bin\hb_newedge_160217.swc -include-sources .\src
+::D:\01_hbworks\_AIR_SDK\bin\compc -output .\bin\hb_newedge_160407.swc -include-sources .\src
+D:\01_hbworks\_FLEX_SDK\bin\compc -output .\bin\hb_newedge_160407.swc -include-sources .\src
 PAUSE
