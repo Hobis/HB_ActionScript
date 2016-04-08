@@ -16,7 +16,21 @@ package hb.utils
 		public function ArrayUtil()
 		{
 		}
+		
 
+		// :: 
+		public static function is_empty(target:Array):Boolean
+		{
+			if ((target == null) || (target.length > 0))
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+		
 		// :: [Array]배열에서 값이 있는지 여부
 		public static function is_contains(target:Array, value:Object):Boolean
 		{
