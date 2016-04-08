@@ -67,7 +67,7 @@ package hb.tools
 		{
 			if (_lconn == null) return;
 			_lconn.send(_connectionName, _methodName, v);
-		}		
+		}
 		
 	}
 
