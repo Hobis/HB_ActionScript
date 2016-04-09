@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<application 
+<application
 	xmlns="http://ns.adobe.com/air/application/21.0"
 	minimumPatchLevel="0">
-	
+
 	<id>hb.tools.Tracer</id>
 	<name>
 		<text xml:lang="en">FlaTracer</text>
@@ -22,17 +22,17 @@
 		<visible>true</visible>
 		<minimizable>true</minimizable>
 		<maximizable>false</maximizable>
-		<resizable>true</resizable>
+		<resizable>false</resizable>
 <!--
 		<width>500</width>
 		<height>500</height>
 		<x>150</x>
-		<y>150</y>		
+		<y>150</y>
 		<minSize>300 300</minSize>
 		<maxSize>800 800</maxSize>
 		-->
 	</initialWindow>
-<!--	
+<!--
 	<installFolder>Example Company/Example Application</installFolder>
 	<programMenuFolder>Example Company/Example Application</programMenuFolder>
 	-->
