@@ -1,4 +1,4 @@
-package hb.tools 
+package hb.tools
 {
 	import flash.events.StatusEvent;
 	import flash.net.LocalConnection;
@@ -10,7 +10,7 @@ package hb.tools
 	public final class FlaTracer 
 	{		
 		public function FlaTracer() 
-		{			
+		{
 		}
 		
 		private static var _lconn:LocalConnection = null;
@@ -37,7 +37,7 @@ package hb.tools
 		//private static var _methodName:String = 'p_trace';
 		private static var _connectionName:String = null;
 		private static var _methodName:String = null;
-		public static function start(connectionName:String, methodName:String):void
+		public static function start(connectionName:String, methodName:String = null):void
 		{
 			if (!LocalConnection.isSupported) return;
 			
@@ -45,6 +45,7 @@ package hb.tools
 			{
 				_connectionName = connectionName;
 				_methodName = methodName;
+				if (_methodName == null) _methodName = 'p_trace';
 				_lconn = new LocalConnection();
 				_lconn.addEventListener(StatusEvent.STATUS, p_lconn_status);
 			}
