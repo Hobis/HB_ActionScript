@@ -5,17 +5,17 @@
 
 	<id>hb.works.TimeStamp</id>
 	<name>
-		<text xml:lang="en">FlaRoot</text>
+		<text xml:lang="en">TimeStamp</text>
 	</name>
         <versionNumber>1.0.0</versionNumber>
         <versionLabel>v1</versionLabel>
-	<filename>FlaRoot</filename>
+	<filename>TimeStamp</filename>
 	<description>
 		<text xml:lang="en"></text>
 	</description>
 	<copyright></copyright>
 	<initialWindow>
-		<content>FlaRoot.swf</content>
+		<content>TimeStamp.swf</content>
 		<title></title>
 		<systemChrome>standard</systemChrome>
 		<transparent>false</transparent>
