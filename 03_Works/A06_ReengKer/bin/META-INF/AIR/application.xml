@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<application xmlns="http://ns.adobe.com/air/application/21.0" minimumPatchLevel="0">
+	<id>com.hobis.works.ReengKer</id>
+	<name>ReengKer</name>
+	<versionNumber>1.0.0</versionNumber>
+	<versionLabel>v1</versionLabel>
+	<filename>ReengKer</filename>
+	<description></description>
+	<copyright></copyright>
+
+	<initialWindow>
+		<content>ReengKer.swf</content>
+		<title></title>
+		<systemChrome>standard</systemChrome>
+		<transparent>false</transparent>
+		<visible>true</visible>
+		<minimizable>true</minimizable>
+		<maximizable>false</maximizable>
+		<resizable>false</resizable>
+	</initialWindow>
+
+	<icon></icon>
+	<customUpdateUI>false</customUpdateUI>
+	<allowBrowserInvocation>false</allowBrowserInvocation>
+</application>
