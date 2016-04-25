@@ -1,208 +1,202 @@
 ﻿package
-{
+{	
 	import flash.display.NativeWindow;
-	import flash.display.Sprite;
 	import flash.display.SimpleButton;
-	import flash.net.URLStream;
-	import flash.net.URLRequest;
+	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.events.IOErrorEvent;
 	import flash.events.MouseEvent;
-	import flash.text.TextField;
+	import flash.events.SecurityErrorEvent;
 	import flash.filesystem.File;
 	import flash.filesystem.FileStream;
+	import flash.net.URLStream;		
+	import flash.text.TextField;
+	import hb.utils.StringUtil;
 	import hb.tools.FlaTracer;
-	import tools.CTool;
-	import flash.filesystem.FileMode;
-	import flash.system.System;
-	import flash.desktop.Clipboard;
-	import flash.desktop.ClipboardFormats;
-	import flash.display.MovieClip;
+	
 	
 
 	public final class Xinger extends Sprite
 	{
 		private var _nw:NativeWindow = null;
 		
+		private var _tf1:TextField = null;
+		private var _tf2:TextField = null;
+		private var _tf3:TextField = null;
+		private var _tf4:TextField = null;
+		
+		
 		private var _us:URLStream = null;
 		
 		private var _f:File = null;
 		private var _fs:FileStream = null;
 		
-		private var _tf1:TextField = null;
-		private var _tf2:TextField = null;
+		private var _urls:Array = null;
+		private var _lcl:uint = 0;
+		private var _lc:uint = 0;		
 		
 		
 		public function Xinger()
 		{
 			_nw = this.stage.nativeWindow;
-			_nw.title = 'Xinger~~~~~~~~~~~~~Ver 1.02';
+			_nw.title = 'Xinger~~~~~~~~~~~~~~~~~~~~~';
 			_nw.x = 80;
 			_nw.y = 80;
 			
+			_tf1 = this.tf_1;
+			_tf1.text = '';
+			_tf2 = this.tf_2;
+			_tf2.text = '';
+			_tf3 = this.tf_3;
+			_tf3.text = '';
+			_tf4 = this.tf_4;
+			_tf4.text = '';
+			
+			
 			_us = new URLStream();
+			_us.addEventListener(SecurityErrorEvent.SECURITY_ERROR, p_f_securityError);
 			_us.addEventListener(IOErrorEvent.IO_ERROR, p_us_ioError);
 			_us.addEventListener(Event.COMPLETE, p_us_complete);
 			
-			//_f = new File(File.desktopDirectory.nativePath).resolvePath('default.txt');
 			_f = new File(File.applicationDirectory.resolvePath('Data').nativePath).resolvePath('default.txt');
+			_f.addEventListener(SecurityErrorEvent.SECURITY_ERROR, p_f_securityError);
 			_f.addEventListener(Event.SELECT, p_f_select);
+			
 			_fs = new FileStream();
 			_fs.addEventListener(IOErrorEvent.IO_ERROR, p_fs_ioError);
 			_fs.addEventListener(Event.CLOSE, p_fs_close);
 			_fs.addEventListener(Event.COMPLETE, p_fs_complete);
 			
 			
-			_tf1 = this.tf_1;
-			_tf2 = this.tf_2;
-			
-			FlaTracer.start('__FlaTracer__');
-			
-			
 			var t_bt:SimpleButton = null;
-			
 			t_bt = this.bt_1;
 			t_bt.addEventListener(MouseEvent.CLICK, p_bt1_click);
 			t_bt = this.bt_2;
 			t_bt.addEventListener(MouseEvent.CLICK, p_bt2_click);
 			t_bt = this.bt_3;
 			t_bt.addEventListener(MouseEvent.CLICK, p_bt3_click);
-			t_bt = this.bt_e1;
-			t_bt.addEventListener(MouseEvent.CLICK, p_bte1_click);
-			t_bt = this.bt_e2;
-			t_bt.addEventListener(MouseEvent.CLICK, p_bte2_click);
-			t_bt = this.bt_e3;
-			t_bt.addEventListener(MouseEvent.CLICK, p_bte3_click);
+			t_bt = this.bt_4;
+			t_bt.addEventListener(MouseEvent.CLICK, p_bt4_click);
+			t_bt = this.bt_5;
+			t_bt.addEventListener(MouseEvent.CLICK, p_bt5_click);
 			
-			
-			_c1 = this.mc_c1;
-			_c1.mouseChildren = false;
-			_c1.mouseEnabled = false;
+			//
+			FlaTracer.start('__FlaTracer__');
 		}
 		
-		private function p_us_ioError(evt:IOErrorEvent):void
+		// ::
+		private function p_us_ioError(event:IOErrorEvent):void
 		{
-			try
-			{
-				_us.close();
-			}
-			catch (e:Error) {}
+			p_load_yes();
 		}
-		
-		private function p_us_complete(evt:Event):void
+
+		// ::
+		private function p_us_complete(event:Event):void
 		{
-			var t_v:String = _us.readUTFBytes(_us.bytesAvailable);
-			_tf1.text = t_v;
-			try
-			{
-				_us.close();
-			}
-			catch (e:Error) {}
-			
-			if (_b)
-			{
-				_f = new File(File.applicationDirectory.resolvePath('Data').nativePath).resolvePath('default' + (_count++) + '.txt');
-				_f.addEventListener(Event.SELECT, p_f_select);				
-				p_bt2_click(null);
-			}
+			p_load_no();
 		}
 		
 		
-		private function p_f_select(evt:Event):void
-		{			
-			//FlaTracer.log('_f.nativePath: ' + _f.nativePath);
-			//FlaTracer.log('CTool.get_ext(_f.nativePath): ' + CTool.get_ext(_f.nativePath));			
-			
-			if (CTool.get_ext(_f.nativePath) == 'txt')
-			{
-				var t_v:String = _tf1.text;				
-				_fs.open(_f, FileMode.WRITE);
-				_fs.writeUTFBytes(t_v);
-				_fs.close();
-			}
-		}			
-		
-		
-		private function p_fs_ioError(evt:IOErrorEvent):void
+		// ::
+		private function p_f_securityError(event:SecurityErrorEvent):void
 		{
 		}
 		
-		private function p_fs_close(evt:Event):void
+		// ::
+		private function p_f_select(event:Event):void
 		{
 		}
 		
-		private function p_fs_complete(evt:Event):void
+		// ::
+		private function p_fs_ioError(event:IOErrorEvent):void
+		{
+		}
+		
+		// ::
+		private function p_fs_close(event:Event):void
+		{
+		}
+		
+		// ::
+		private function p_fs_complete(event:Event):void
 		{
 		}
 
-		
-		// :: Load
-		private function p_bt3_click(evt:MouseEvent):void
+
+		// :: Start Click
+		private function p_bt1_click(event:MouseEvent):void
 		{
-			if (_us.connected) return;
-			var t_url:String = _tf2.text;
-			var t_ur:URLRequest = new URLRequest(t_url);
-			_us.load(t_ur);
+			if (_urls == null)
+			{
+				var t_v:String = _tf2.text;
+				if (!StringUtil.is_empty(t_v))
+				{
+					_urls = t_v.split('\r');
+					_lcl = _urls.length;
+					_lc = 0;
+					p_load_checkNext();
+					//FlaTracer.log('_lcl: ' + _lcl);
+					//FlaTracer.log('_lc: ' + _lc);
+				}
+			}
+		}
+		
+		// :: Stop Click
+		private function p_bt2_click(event:MouseEvent):void
+		{
+		}
+		
+		// :: Clear Click
+		private function p_bt3_click(event:MouseEvent):void
+		{
+		}
+		
+		// :: Load Click
+		private function p_bt4_click(event:MouseEvent):void
+		{
+		}
+		
+		// :: Save Click
+		private function p_bt5_click(event:MouseEvent):void
+		{
+		}
+		
+		
+		
+		// ::
+		private function p_load_checkNext():void
+		{
+			if (_lc < _lcl)
+			{
+				_lc++;
+				p_load_start();
+				if (_lc >= _lcl)
+				{
+					//trace('완료');
+				}
+			}
+		}
+		
+		// ::
+		private function p_load_start():void
+		{
+			var t_url:String = _lcl[_lc];
+			if (t_url != null)
+			{
+				var t_ur:URLRequest = new URLRequest(t_url);
+				_us.load(t_ur);
+			}
+		}
+		
+		// ::
+		private function p_load_yes():void
+		{
+		}
+		
+		// ::
+		private function p_load_no():void
+		{
 		}		
-		
-		// :: Save
-		private function p_bt2_click(evt:MouseEvent):void
-		{
-			p_f_select(null);
-			/*
-			if (_f.exists)
-				p_f_select(null);
-			else
-				_f.browseForSave('결과를 저장합니다.');*/
-		}
-		
-		// : Clear
-		private function p_bt1_click(evt:MouseEvent):void
-		{
-			_tf1.text = '';
-		}
-		
-		
-		
-		private function p_bte1_click(evt:MouseEvent):void
-		{
-			var t_v:String = String(Clipboard.generalClipboard.getData(ClipboardFormats.TEXT_FORMAT));
-			_tf2.text = t_v
-		}
-
-
-
-
-		private function p_ef(evt:Event):void
-		{
-			p_bt3_click(null);
-		}
-
-		private var _c1:MovieClip;
-		private var _b:Boolean = false;
-		private var _count:uint = 0;
-		/*
-		178
-		235*/
-		private function p_bte2_click(evt:MouseEvent):void
-		{
-			if (_b)
-			{
-				this.removeEventListener(Event.ENTER_FRAME, p_ef);
-				_c1.x = 178;
-				_b = false;				
-			}
-		}
-		
-		private function p_bte3_click(evt:MouseEvent):void
-		{
-			if (!_b)
-			{
-				this.addEventListener(Event.ENTER_FRAME, p_ef);
-				_c1.x = 235;
-				_b = true;
-			}
-		}
 		
 	}
 }
