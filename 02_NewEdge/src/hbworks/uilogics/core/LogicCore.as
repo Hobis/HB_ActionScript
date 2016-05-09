@@ -1,67 +1,71 @@
-/**
+﻿/**
 	@Name: LogicCore
 	@Author: HobisJung(jhb0b@naver.com)
 	@Blog: http://blog.naver.com/jhb0b
-	@Date: 2013-04-17
+	@Date: 2016-05-09
 */
 package hbworks.uilogics.core
 {
 	import flash.display.DisplayObjectContainer;
 	import flash.display.Stage;
 	import flash.events.EventDispatcher;
+	import hb.core.IContainerObserver;
+	import hb.core.IDisposable;
+	import hb.core.INamer;
 
-	public class LogicCore extends EventDispatcher implements IContainerObserver
+
+	public class LogicCore extends EventDispatcher implements IContainerObserver, INamer, IDisposable, ILogic
 	{
-		public function LogicCore(container:DisplayObjectContainer, name:String = null)
+		public function LogicCore(cont:DisplayObjectContainer, name:String = null)
 		{
-			if (container.stage == null)
+			if (cont.stage == null)
 			{
 				throw new Error('LogicCore::(This container is not added in stage.)');
 			}
 			else
 			{
-				this.m_container = container;
-
-				if
-				(
-					(this.m_container != null) &&
-					(this.m_container.stage != null)
-				)
-					this.m_stage = this.m_container.stage;
-
-				this.set_name(name);
+				_cont = cont;
+				_stage = _cont.stage;
+				_name = name;
 			}
 		}
 
-		// ----------------------------------------------------------------------------------------------------
-		//	 IContainerObserver implements
-		// ----------------------------------------------------------------------------------------------------
-		// :: UI객체에 사용된 전체 컨테이너
+		// - Container
+		protected var _cont:DisplayObjectContainer = null;
 		public function get_container():DisplayObjectContainer
 		{
-			return this.m_container;
+			return _cont;
 		}
-
-		// :: 네임 반환
+		
+		// - Stage
+		protected var _stage:Stage = null;
+		
+		// - Name
+		protected var _name:String = null;
 		public function get_name():String
 		{
-			return this.m_name;
+			return _name;
 		}
-
-		// :: 네임 설정
-		public function set_name(name:String):void
+		
+		public function dispose():void
 		{
-			this.m_name = name;
+			if (_cont == null) return;
+			_cont = null;
+			_stage = null;
+			_name = null;
 		}
-		// ----------------------------------------------------------------------------------------------------
+		
+		// - 
+		private var _enabled:Boolean = false;
+		public function get_enabled():Boolean
+		{
+			return _enabled;
+		}		
+		public function set_enabled(b:Boolean):void
+		{
+			_enabled = b;
+		}
 
-
-		// - Container
-		protected var m_container:DisplayObjectContainer = null;
-		// - Stage
-		protected var m_stage:Stage = null;
-		// - Name
-		protected var m_name:String = null;
 	}
 
 }

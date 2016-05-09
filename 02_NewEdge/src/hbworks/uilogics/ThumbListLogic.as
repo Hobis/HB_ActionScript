@@ -36,11 +36,11 @@ package hbworks.uilogics
 				thumbProtoName = 'ti_proto';
 			}
 
-			var t_mc:MovieClip = this.m_container[thumbProtoName];
+			var t_mc:MovieClip = this._cont[thumbProtoName];
 			this.m_thumbProto = t_mc.constructor;
 			this.m_thumbProto_w = t_mc.width;
 			this.m_thumbProto_h = t_mc.height;
-			this.m_container.removeChild(t_mc);
+			this._cont.removeChild(t_mc);
 
 
 			if (alignInfo == null)
@@ -277,10 +277,10 @@ package hbworks.uilogics
 
 			if (this.m_thumbInfos != null)
 			{
-				var t_la:uint = uint(this.m_container.numChildren), i:uint;
+				var t_la:uint = uint(this._cont.numChildren), i:uint;
 				for (i = 0; i < t_la; i++)
 				{
-					var t_mc:MovieClip = this.m_container.getChildAt(i) as MovieClip;
+					var t_mc:MovieClip = this._cont.getChildAt(i) as MovieClip;
 					if (t_mc != null)
 					{
 						if (t_rv == null)
@@ -297,10 +297,10 @@ package hbworks.uilogics
 		// :: 현재 컨테이너에 썸네일 아이템 제거
 		private function p_thumbs_cont_clear():void
 		{
-			var t_la:uint = uint(this.m_container.numChildren), i:uint;
+			var t_la:uint = uint(this._cont.numChildren), i:uint;
 			for (i = 0; i < t_la; i++)
 			{
-				var t_mc:MovieClip = this.m_container.getChildAt(0) as MovieClip;
+				var t_mc:MovieClip = this._cont.getChildAt(0) as MovieClip;
 				if (t_mc != null)
 				{
 					try
@@ -312,7 +312,7 @@ package hbworks.uilogics
 					}
 					catch (e:Error) {}
 
-					this.m_container.removeChild(t_mc);
+					this._cont.removeChild(t_mc);
 				}
 			}
 
@@ -327,7 +327,7 @@ package hbworks.uilogics
 			{
 				if (this.m_thumbIndex > -1)
 				{
-					var t_mc:MovieClip = this.m_container.getChildAt(this.m_thumbIndex) as MovieClip;
+					var t_mc:MovieClip = this._cont.getChildAt(this.m_thumbIndex) as MovieClip;
 					if (t_mc != null)
 					{
 						try
@@ -360,7 +360,7 @@ package hbworks.uilogics
 
 				if (thumbIndex != this.m_thumbIndex)
 				{
-					var t_mc:MovieClip = this.m_container.getChildAt(thumbIndex) as MovieClip;
+					var t_mc:MovieClip = this._cont.getChildAt(thumbIndex) as MovieClip;
 					if (t_mc != null)
 					{
 						this.unselectThumb();
@@ -461,7 +461,7 @@ package hbworks.uilogics
 				t_mc.x = Math.round((this.m_thumbProto_w + this.m_alignInfo.marginX) * (i % t_hl));
 				t_mc.y = Math.round((this.m_thumbProto_h + this.m_alignInfo.marginY) * Math.floor(i / t_hl));
 
-				this.m_container.addChild(t_mc);
+				this._cont.addChild(t_mc);
 			}
 		}
 	}

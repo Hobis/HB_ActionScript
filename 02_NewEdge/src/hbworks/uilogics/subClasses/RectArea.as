@@ -16,9 +16,6 @@
 		public var thumbWidth:Number;
 		public var thumbHeight:Number;
 
-		public var thumbMouseDownX:Number;
-		public var thumbMouseDownY:Number;
-
 		public var trackWidth:Number;
 		public var trackHeight:Number;
 

@@ -7,19 +7,19 @@
 	}
  */
 package hbworks.uilogics
-{
+{/*
 	import hb.tools.DebugTool;
 
 	import hbworks.uilogics.events.SliderLogicEvent;
 	import hbworks.uilogics.core.ISliderLogic;
 	import hbworks.uilogics.core.IUILogic;
-	import hbworks.uilogics.subClasses.RectArea;
+	import hbworks.uilogics.subClasses.RectArea;*/
 
-	public class ScollbarLogic extends SliderLogic/* implements IUILogic*/
+	public class ScollbarLogic/* extends SliderLogic implements IUILogic*/
 	{
 		public function ScollbarLogic()
 		{
-			super(null, null);
+			//super(null, null);
 		}
 	}
 }

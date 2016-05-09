@@ -10,9 +10,11 @@ function p_init():void
 {
 	_frameHelper = new FrameHelper(owner.mc_1);
 	_frameHelper.set_callBack(
-		function(eObj:Object):void {
+		function(eObj:Object):void
+		{
 			trace('eObj.type: ' + eObj.type);
-			switch (eObj.type) {
+			switch (eObj.type)
+			{
 				case FrameHelper.CT_END_FRAME:
 					break;
 					
@@ -27,23 +29,25 @@ function p_init():void
 			}
 		}
 	);
-	//_frameHelper.
 	
 	SimpleButton(owner.bt_1).addEventListener(MouseEvent.CLICK,
 		function(event:MouseEvent):void
 		{
+			if (_frameHelper == null) return;
 			_frameHelper.gotoPlayLabel('#_1', '#_7', true);
 		}
 	);
 	SimpleButton(owner.bt_2).addEventListener(MouseEvent.CLICK,
 		function(event:MouseEvent):void
-		{		
+		{
+			if (_frameHelper == null) return;
 			_frameHelper.gotoPlayLabel('#_6', '#_10', true, 1, -2);
 		}
 	);
 	SimpleButton(owner.bt_3).addEventListener(MouseEvent.CLICK,
 		function(event:MouseEvent):void
-		{		
+		{
+			if (_frameHelper == null) return;
 			_frameHelper.stop();
 		}
 	);
@@ -51,6 +55,7 @@ function p_init():void
 		function(event:MouseEvent):void
 		{		
 			_frameHelper.dispose();
+			_frameHelper = null;
 		}
 	);
 }
@@ -60,3 +65,4 @@ var _frameHelper:FrameHelper = null;
 
 
 p_init();
+

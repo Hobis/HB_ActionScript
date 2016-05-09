@@ -1,25 +1,25 @@
-package hb.core
+package hb.core 
 {
+	
 	import flash.display.DisplayObjectContainer;
+	
 	/**
 	 * ...
 	 * @author Hobis
-	 * @name Abstract Base Class
-	 * 
 	 */
-	public class AContainerObserverBase implements IContainerObserver, ICallBack
+	public class CBase implements IContainerObserver, ICallBack, IDisposable
 	{
-		// ::
-		public function AContainerObserverBase(cont:DisplayObjectContainer) 
+		// :: 생성자
+		public function CBase(cont:DisplayObjectContainer) 
 		{
-			this._cont = cont;			
+			_cont = cont;			
 		}
 		
 		// - 컨테이너
-		private var _cont:DisplayObjectContainer = null;
+		protected var _cont:DisplayObjectContainer = null;
 		public function get_container():DisplayObjectContainer
 		{
-			return this._cont;
+			return _cont;
 		}
 		
 		// - 콜백 기본
@@ -33,5 +33,14 @@ package hb.core
 		{
 			_callBack = f;
 		}
+		
+		// :: 객체패기
+		public function dispose():void
+		{
+			if (_cont == null) return;
+			_cont = null;
+			_callBack = null;
+		}
 	}
+	
 }
