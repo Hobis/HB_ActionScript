@@ -68,7 +68,7 @@ package hb.useful
 		{
 			if (_callBack == null) return;
 			_callBack(eObj);
-		}		
+		}
 
 		
 		// :: 검색후 아이템 설정

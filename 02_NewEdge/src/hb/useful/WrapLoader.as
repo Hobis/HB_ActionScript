@@ -1,64 +1,10 @@
 ﻿/**	
 	@Name: WrapLoader
 	@Author: HobisJung
-	@Date: 2013-08-28
-	@Comment:
-	{
-		좀 사용하기 편하게 만든 로더
-	}
+	@Date: 2016-05-03
+	@Comment: 좀 사용하기 편하게 만든 로더
 	@Using:
 	{
-		import flash.events.Event;
-		import flash.events.IOErrorEvent;
-		import flash.events.ProgressEvent;
-		import flash.net.URLRequest;
-		import hb.useful.WrapLoader;
-		
-		
-		// 사용법 1
-		var t_wl:WrapLoader = new WrapLoader(this, null,
-			function(event:Event):void
-			{
-				trace('event.type: ' + event.type);
-			},
-			function(event:ProgressEvent):void
-			{
-				trace('event.type: ' + event.type);
-			},
-			function(event:IOErrorEvent):void
-			{
-				trace('event.type: ' + event.type);
-			}
-		);
-		t_wl.load_a('WrapLoader_Sub_1.swf');
-		
-		
-		HB_Proxy.hb_frame_delayExcute(this,
-			function():void
-			{
-				t_wl.dispose();
-				t_wl = null;
-			}, null, 30 * 3
-		);
-		
-		// 사용법 2
-		var t_wl2:WrapLoader = new WrapLoader(this, new URLRequest('WrapLoader_Sub_2.swf'),
-			function(event:Event):void
-			{
-				trace('event.type: ' + event.type);
-			},
-			function(event:ProgressEvent):void
-			{
-				trace('event.type: ' + event.type);
-			},
-			function(event:IOErrorEvent):void
-			{
-				trace('event.type: ' + event.type);
-			}
-		);
-		t_wl2.get_loader().x = 100;
-		t_wl2.get_loader().y = 100;
-		t_wl2.load();
 	}
 */
 package hb.useful
@@ -71,134 +17,123 @@ package hb.useful
 	import flash.events.ProgressEvent;	
 	import flash.system.LoaderContext;
 	import flash.net.URLRequest;
+	import hb.tools.DebugTool;
 
 
-	public final class WrapLoader
+	public class WrapLoader
 	{
 		// :: 생성자
 		public function WrapLoader(
-								container:DisplayObjectContainer = null,
+								container:DisplayObjectContainer,
 								urlRequest:URLRequest = null,
 								completeHandler:Function = null,
 								progressHandler:Function = null,
 								ioErrorHandler:Function = null):void
 		{
-			this.m_loader = new Loader();
-			var t_loaderInfo:LoaderInfo = this.m_loader.contentLoaderInfo;
-
-			if (container != null)
-			{
-				container.addChild(this.m_loader);
-			}
-			
+			_loader = new Loader();
+			container.addChild(_loader);
+				
 			if (urlRequest != null)
 			{
-				this.m_urlRequest = urlRequest;
-			}			
+				_urlRequest = urlRequest;
+			}
+			
+			
+			var t_loaderInfo:LoaderInfo = _loader.contentLoaderInfo;				
 
 			if (completeHandler != null)
 			{
-				this.m_completeHandler = completeHandler;
-				t_loaderInfo.addEventListener(Event.COMPLETE, this.m_completeHandler);
+				_completeHandler = completeHandler;
+				t_loaderInfo.addEventListener(Event.COMPLETE, _completeHandler);
 			}
 
 			if (progressHandler != null)
 			{
-				this.m_progressHandler = progressHandler;
-				t_loaderInfo.addEventListener(ProgressEvent.PROGRESS, this.m_progressHandler);
+				_progressHandler = progressHandler;
+				t_loaderInfo.addEventListener(ProgressEvent.PROGRESS, _progressHandler);
 			}
 
 			if (ioErrorHandler != null)
 			{
-				this.m_ioErrorHandler = ioErrorHandler;
-				t_loaderInfo.addEventListener(IOErrorEvent.IO_ERROR, this.m_ioErrorHandler);
+				_ioErrorHandler = ioErrorHandler;
+				t_loaderInfo.addEventListener(IOErrorEvent.IO_ERROR, _ioErrorHandler);
 			}
 			else
 			{
-				t_loaderInfo.addEventListener(IOErrorEvent.IO_ERROR, this.p_loader_ioError);
+				t_loaderInfo.addEventListener(IOErrorEvent.IO_ERROR, p_loader_ioError);
 			}
 		}
 		
-		// :: 완료 핸들러 반환
+		// - 로더 객체
+		private var _loader:Loader = null;		
+		
+		// :: 로더 컨테이너 반환
+		public function get_loaderContainer():DisplayObjectContainer
+		{
+			return _loader.parent;
+		}
+		
+		// :: 로더 인포 반환
+		public function get_loaderInfo():LoaderInfo
+		{
+			return _loader.contentLoaderInfo;
+		}
+		
+		// :: 로더 객체 반환
+		public function get_loader():Loader
+		{
+			return _loader;
+		}
+		
+		
+		// - 완료 핸들러 참조
+		private var _completeHandler:Function = null;
 		public function get_completeHandler():Function
 		{
-			return this.m_completeHandler;
+			return _completeHandler;
 		}
-		// - 완료 핸들러 참조
-		private var m_completeHandler:Function = null;
 		
-		// :: 진행 핸들러 반환
+		// - 진행 핸들러 참조
+		private var _progressHandler:Function = null;
 		public function get_progressHandler():Function
 		{
-			return this.m_progressHandler;
+			return _progressHandler;
 		}
-		// - 진행 핸들러 참조
-		private var m_progressHandler:Function = null;
 		
-		// :: 에러 핸들러 반환
+		// - 에러 핸들러 참조
+		private var _ioErrorHandler:Function = null;
 		public function get_ioErrorHandler():Function
 		{
-			return this.m_ioErrorHandler;
-		}
-		// - 에러 핸들러 참조
-		private var m_ioErrorHandler:Function = null;		
-		
+			return _ioErrorHandler;
+		}		
 
 		// :: 에러 핸들러 (기본용)
 		private function p_loader_ioError(event:IOErrorEvent):void
 		{
-			var t_loaderInfo:LoaderInfo = this.m_loader.contentLoaderInfo;
+			var t_loaderInfo:LoaderInfo = this._loader.contentLoaderInfo;
 			t_loaderInfo.removeEventListener(event.type, this.p_loader_ioError);
-
-			trace('p_loader_ioError');
+			
+			DebugTool.test('p_loader_ioError');
 		}
 		
-
-		// :: 객체 폐기(재사용 안됨)
-		public function dispose():void
-		{
-			this.close();
-			
-			var t_loaderInfo:LoaderInfo = this.m_loader.contentLoaderInfo;
-			
-			if (this.m_completeHandler != null)
-			{
-				t_loaderInfo.removeEventListener(Event.COMPLETE, this.m_completeHandler);
-			}
-
-			if (this.m_progressHandler != null)
-			{
-				t_loaderInfo.removeEventListener(ProgressEvent.PROGRESS, this.m_progressHandler);
-			}
-
-			if (this.m_ioErrorHandler != null)
-			{
-				t_loaderInfo.removeEventListener(IOErrorEvent.IO_ERROR, this.m_ioErrorHandler);
-			}
-			else
-			{
-				t_loaderInfo.removeEventListener(IOErrorEvent.IO_ERROR, this.p_loader_ioError);
-			}
-			
-			var t_loaderCont:DisplayObjectContainer = this.m_loader.parent;
-			if (t_loaderCont != null)
-			{
-				t_loaderCont.removeChild(this.m_loader);
-			}
-			
-			this.m_loader = null;
-		}
-
+		
 		// :: 닫기
 		public function close(gc:Boolean = true):void
 		{
 			try
 			{
-				this.m_loader.close();
+				_loader.close();
 			}
 			catch (e:Error) {}
 			
-			this.m_loader.unloadAndStop(gc);
+			_loader.unloadAndStop(gc);
+		}
+		
+		// - Url 객체
+		private var _urlRequest:URLRequest = null;
+		public function get_urlRequest():URLRequest
+		{
+			return _urlRequest;
 		}
 
 		// :: 로드
@@ -208,51 +143,63 @@ package hb.useful
 			
 			if (urlRequest != null)
 			{
-				this.m_urlRequest = urlRequest;
-				this.m_loader.load(this.m_urlRequest, lc);
+				_urlRequest = urlRequest;
+				_loader.load(_urlRequest, lc);
 			}
 			else
 			{
-				if (this.m_urlRequest != null)
+				if (_urlRequest != null)
 				{
-					this.m_loader.load(this.m_urlRequest, lc);
+					_loader.load(_urlRequest, lc);
 				}
 			}
-
 		}
 		
-		// :: 로드 a
+		// :: 로드_a
 		public function load_a(url:String, lc:LoaderContext = null):void
 		{
-			this.load(new URLRequest(url), lc);
-		}		
-		
-		
-		// :: Url 객체 반환
-		public function get_urlRequest():URLRequest
-		{
-			return this.m_urlRequest;
+			_urlRequest = new URLRequest(url);
+			this.load(_urlRequest, lc);
 		}
-		// - Url 객체
-		private var m_urlRequest:URLRequest = null;		
 		
 
-		// :: 로더 컨테이너 반환
-		public function get_loaderContainer():DisplayObjectContainer
+		// :: 객체 폐기(재사용 안됨)
+		public function dispose():void
 		{
-			return this.m_loader.parent;
+			this.close();
+			
+			var t_loaderInfo:LoaderInfo = this._loader.contentLoaderInfo;
+			
+			if (_completeHandler != null)
+			{
+				t_loaderInfo.removeEventListener(Event.COMPLETE, _completeHandler);
+				_completeHandler = null;
+			}
+
+			if (_progressHandler != null)
+			{
+				t_loaderInfo.removeEventListener(ProgressEvent.PROGRESS, _progressHandler);
+				_progressHandler = null;
+			}
+
+			if (_ioErrorHandler != null)
+			{
+				t_loaderInfo.removeEventListener(IOErrorEvent.IO_ERROR, _ioErrorHandler);
+				_ioErrorHandler = null;
+			}
+			else
+			{
+				t_loaderInfo.removeEventListener(IOErrorEvent.IO_ERROR, p_loader_ioError);
+			}
+			
+			var t_loaderCont:DisplayObjectContainer = _loader.parent;
+			if (t_loaderCont != null)
+			{
+				t_loaderCont.removeChild(_loader);
+			}
+			
+			_urlRequest = null;
+			_loader = null;
 		}
-		// :: 로더 인포 반환
-		public function get_loaderInfo():LoaderInfo
-		{
-			return this.m_loader.contentLoaderInfo;
-		}		
-		// :: 로더 객체 반환
-		public function get_loader():Loader
-		{
-			return this.m_loader;
-		}
-		// - 로더 객체
-		private var m_loader:Loader = null;
 	}
 }

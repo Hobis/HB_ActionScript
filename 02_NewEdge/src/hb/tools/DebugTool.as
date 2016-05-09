@@ -16,7 +16,7 @@ package hb.tools
 	{
 		public function DebugTool()
 		{
-		}		
+		}
 
 		//
 		public static var isDebug:Boolean = true;

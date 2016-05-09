@@ -17,11 +17,11 @@ package hb.utils
 		{
 		}
 		
-
+		
 		// :: 
 		public static function is_empty(target:Array):Boolean
 		{
-			if ((target == null) || (target.length > 0))
+			if ((target == null) || (target.length == 0))
 			{
 				return true;
 			}
@@ -29,7 +29,7 @@ package hb.utils
 			{
 				return false;
 			}
-		}
+		}		
 		
 		// :: [Array]배열에서 값이 있는지 여부
 		public static function is_contains(target:Array, value:Object):Boolean
