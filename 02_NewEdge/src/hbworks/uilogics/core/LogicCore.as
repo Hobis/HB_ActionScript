@@ -41,7 +41,7 @@ package hbworks.uilogics.core
 		protected var _stage:Stage = null;
 		
 		// - Name
-		protected var _name:String = null;
+		private var _name:String = null;
 		public function get_name():String
 		{
 			return _name;
@@ -56,7 +56,7 @@ package hbworks.uilogics.core
 		}
 		
 		// - 
-		private var _enabled:Boolean = false;
+		private var _enabled:Boolean = true;
 		public function get_enabled():Boolean
 		{
 			return _enabled;

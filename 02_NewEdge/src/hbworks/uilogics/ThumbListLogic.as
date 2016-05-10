@@ -333,8 +333,8 @@ package hbworks.uilogics
 						try
 						{
 							var t_bl:ButtonLogic = t_mc.d_bl;
-							t_bl.selected = false;
-							t_bl.enabled = true;
+							t_bl.set_selected(false);
+							t_bl.set_enabled(true);
 						}
 						catch (e:Error) {}
 					}
@@ -369,8 +369,8 @@ package hbworks.uilogics
 						try
 						{
 							var t_bl:ButtonLogic = t_mc.d_bl;
-							t_bl.selected = true;
-							t_bl.enabled = false;
+							t_bl.set_selected(true);
+							t_bl.set_enabled(false);
 						}
 						catch (e:Error) {}
 					}
@@ -423,7 +423,7 @@ package hbworks.uilogics
 		private function p_thumbs_item_click(event:MouseEvent):void
 		{
 			var t_bl:ButtonLogic = event.currentTarget as ButtonLogic;
-			var t_mc:MovieClip = t_bl.target;
+			var t_mc:MovieClip = t_bl.get_target();
 			var t_index:int = t_mc.d_index;
 
 			this.selectThumb(t_index);

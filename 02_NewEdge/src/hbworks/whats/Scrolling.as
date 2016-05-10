@@ -12,7 +12,7 @@ package hbworks.whats
 	import flash.display.SimpleButton;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
-	import hbworks.uilogics.SliderLogicFrame;
+	import hbworks.uilogics.SliderFrameLogic;
 	import hb.utils.ObjectUtil;
 	
 	
@@ -27,8 +27,8 @@ package hbworks.whats
 			_sbt1 = _target.sbt_1;
 			_sbt2 = _target.sbt_2;
 			
-			_slf = new SliderLogicFrame(_slider, null, SliderLogicFrame.TYPE_VERTICAL);
-			_slf.onCallBack = p_slf_onCallBack;
+			_slf = new SliderFrameLogic(_slider, SliderFrameLogic.TYPE_VERTICAL, 10);
+			_slf.set_callBack(p_slf_callBack);
 			
 			_sbt1.addEventListener(MouseEvent.MOUSE_DOWN, p_sbts_mouseDown);
 			_sbt2.addEventListener(MouseEvent.MOUSE_DOWN, p_sbts_mouseDown);			
@@ -44,9 +44,9 @@ package hbworks.whats
 			return _target;
 		}
 		
-		public static const EVENT_TYPE_MOUSE_UP:String = SliderLogicFrame.EVENT_TYPE_MOUSE_UP;
-		public static const EVENT_TYPE_MOUSE_DOWN:String = SliderLogicFrame.EVENT_TYPE_MOUSE_DOWN;
-		public static const EVENT_TYPE_UPDATE:String = SliderLogicFrame.EVENT_TYPE_UPDATE;
+		public static const EVENT_TYPE_MOUSE_UP:String = SliderFrameLogic.CT_MOUSE_UP;
+		public static const EVENT_TYPE_MOUSE_DOWN:String = SliderFrameLogic.CT_MOUSE_DOWN;
+		public static const EVENT_TYPE_UPDATE:String = SliderFrameLogic.CT_UPDATE;
 		
 		public static const EVENT_TYPE_SCROLL_UP:String = 'scrollUp';
 		public static const EVENT_TYPE_SCROLL_DOWN:String = 'scrollDown';
@@ -64,7 +64,7 @@ package hbworks.whats
 			return _isScrollDown;
 		}
 		
-		private var _slf:SliderLogicFrame = null;
+		private var _slf:SliderFrameLogic = null;
 		public function get_ratio():Number
 		{
 			return _slf.get_ratio();
@@ -74,21 +74,21 @@ package hbworks.whats
 			_slf.set_ratio(v);
 		}
 		
-		private function p_slf_onCallBack(eObj:Object):void
+		private function p_slf_callBack(eObj:Object):void
 		{
 			switch (eObj.type)
 			{			
-				case SliderLogicFrame.EVENT_TYPE_MOUSE_UP:
+				case SliderFrameLogic.CT_MOUSE_UP:
 				{
 					_isScrollDown = false;
 					break;
 				}
-				case SliderLogicFrame.EVENT_TYPE_MOUSE_DOWN:
+				case SliderFrameLogic.CT_MOUSE_DOWN:
 				{
 					_isScrollDown = true;
 					break;
 				}				
-				case SliderLogicFrame.EVENT_TYPE_UPDATE:
+				case SliderFrameLogic.CT_UPDATE:
 				{
 					break;
 				}

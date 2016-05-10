@@ -29,16 +29,28 @@ function p_mouse_udm(event:MouseEvent):void
 }
 
 var owner:MovieClip = this;
-var _sl1:SliderLogic = new SliderLogic(owner.slc_1, SliderLogic.TYPE_HORIZONTAL, 'SliderLogic-1');
+var _sl1:SliderLogic = new SliderLogic(owner.slc_1, 'SliderLogic-1', SliderLogic.TYPE_HORIZONTAL);
 _sl1.addEventListener(MouseEvent.MOUSE_UP, p_mouse_udm);
 _sl1.addEventListener(MouseEvent.MOUSE_DOWN, p_mouse_udm);
 _sl1.addEventListener(MouseEvent.MOUSE_MOVE, p_mouse_udm);
-var _sl2:SliderLogic = new SliderLogic(owner.slc_2, SliderLogic.TYPE_VERTICAL, 'SliderLogic-2');
+var _sl2:SliderLogic = new SliderLogic(owner.slc_2, 'SliderLogic-2', SliderLogic.TYPE_VERTICAL);
 _sl2.addEventListener(MouseEvent.MOUSE_UP, p_mouse_udm);
 _sl2.addEventListener(MouseEvent.MOUSE_DOWN, p_mouse_udm);
 _sl2.addEventListener(MouseEvent.MOUSE_MOVE, p_mouse_udm);
 
 
+SimpleButton(owner.bt_6).addEventListener(MouseEvent.CLICK,
+	function(event:MouseEvent):void
+	{
+		_sl1.set_enabled(false);
+	}
+);
+SimpleButton(owner.bt_5).addEventListener(MouseEvent.CLICK,
+	function(event:MouseEvent):void
+	{
+		_sl1.set_enabled(true);
+	}
+);
 SimpleButton(owner.bt_4).addEventListener(MouseEvent.CLICK,
 	function(event:MouseEvent):void
 	{
