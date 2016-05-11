@@ -24,7 +24,7 @@ package hbworks.uilogics
 		public static const TYPE_VERTICAL:String = 'vertical';
 				
 		// ::
-		public function SliderLogic(container:DisplayObjectContainer, name:String = null,										
+		public function SliderLogic(container:DisplayObjectContainer, name:String = null,
 										type:String = null,
 										thumbName:String = null,
 										trackName:String = null)
@@ -40,7 +40,7 @@ package hbworks.uilogics
 				_type = type;
 			
 			if (thumbName == null)
-				thumbName = 'thumb_mc';			
+				thumbName = 'thumb_mc';
 			_thumb = _cont[thumbName];
 			if (_thumb == null)
 				throw new Error('thumb is null.');
@@ -51,7 +51,7 @@ package hbworks.uilogics
 			if (_track == null)
 				throw new Error('track is null.');
 			
-			p_rectAreaUpdate();			
+			p_rectAreaUpdate();
 			
 			_cont.addEventListener(MouseEvent.MOUSE_DOWN, p_mouseDown);
 		}
