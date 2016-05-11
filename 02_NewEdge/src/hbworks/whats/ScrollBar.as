@@ -17,6 +17,10 @@ package hbworks.whats
 
 	public class ScrollBar extends SliderLogic
 	{
+		public static const TYPE_HORIZONTAL:String = SliderLogic.TYPE_HORIZONTAL;
+		public static const TYPE_VERTICAL:String = SliderLogic.TYPE_VERTICAL;
+		
+		
 		public static function create(container:DisplayObjectContainer, name:String = null,
 										type:String = null,
 										btnNegative:SimpleButton = null, btnPositive:SimpleButton = null,
