@@ -1,0 +1,16 @@
+<root>
+	<uis>
+		<ui><![CDATA[https://www.g2a.com/?adid=KO_3days_HTML&id=77&gclid=CJmU3c2YxMwCFYJjvAods1QHcQ]]></ui>
+		<ui><![CDATA[http://regexr.com/]]></ui>
+		<ui><![CDATA[https://www.instagram.com/carrie_and_friends/]]></ui>
+		<ui><![CDATA[https://www.youtube.com/channel/UC1Wq-BQZblFGbGgDAoCwrmA]]></ui>
+	</uis>
+	<ris>
+		<ri><![CDATA[;/<title>([\s\S]*?)</title>/g]]></ri>
+		<ri><![CDATA[;/<a /g]]></ri>
+		<ri><![CDATA[;/<div /g]]></ri>
+		<ri><![CDATA[;/<img\b[\s\S]*?/?>/g]]></ri>
+		<ri><![CDATA[;/(http|https|ftp|telnet|news|mms)://[^\"'\s()]+/gi]]></ri>
+		<ri><![CDATA[/(\S+)=["']?((?:.(?!["']?\s+(?:\S+)=|[>"']))+.)["']?/gi]]></ri>
+	</ris>
+</root>

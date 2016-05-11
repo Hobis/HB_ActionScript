@@ -1,0 +1,17 @@
+<root>
+	<uis>
+		<ui><![CDATA[https://www.g2a.com/?adid=KO_3days_HTML&id=77&gclid=CJmU3c2YxMwCFYJjvAods1QHcQ]]></ui>
+		<ui><![CDATA[http://regexr.com/]]></ui>
+		<ui><![CDATA[https://www.instagram.com/carrie_and_friends/]]></ui>
+		<ui><![CDATA[http://hobis.tistory.com/]]></ui>
+		<ui><![CDATA[http://blog.eairship.kr/175#trackback1747334]]></ui>
+		<ui><![CDATA[http://www.afreecatv.com/?hash=game]]></ui>
+		<ui><![CDATA[xxxxxxxxxxxxxxxxxxdddddddddddddddaaaaaaaaaaaaaaa]]></ui>
+		<ui><![CDATA[https://www.google.co.kr/#q=ms]]></ui>
+	</uis>
+	<ris>
+		<ri><![CDATA[;/<script\b[^>]*>([\s\S]*?)<\/script>/gm]]></ri>
+		<ri><![CDATA[;/<div\b[^>]*>([\s\S]*?)<\/div>/gm]]></ri>
+		<ri><![CDATA[/<title>.+?</title>/]]></ri>
+	</ris>
+</root>
