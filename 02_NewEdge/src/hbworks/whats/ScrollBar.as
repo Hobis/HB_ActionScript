@@ -10,19 +10,21 @@ package hbworks.whats
 {
 	import flash.display.DisplayObjectContainer;
 	import flash.display.SimpleButton;
-	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
 	import hbworks.uilogics.SliderLogic;
-	import hbworks.whats.events.ScrollBarEvent;
+	
 
 	public class ScrollBar extends SliderLogic
 	{
 		public static function create(container:DisplayObjectContainer, name:String = null,
 										type:String = null,
-										btn1:SimpleButton = null, btn2:SimpleButton = null):ScrollBar
+										btnNegative:SimpleButton = null, btnPositive:SimpleButton = null,
+										valueMin:Number = 1, valueMax:Number = 10,
+										vec:Number = 1):ScrollBar
 		{
-			return new ScrollBar(container, name, type, null, null, btn1, btn2);
+			return new ScrollBar(container, name, type, null, null,
+									btnNegative, btnPositive, valueMin, valueMax, vec);
 		}
 		
 		
@@ -30,32 +32,98 @@ package hbworks.whats
 									type:String = null,
 									thumbName:String = null,
 									trackName:String = null,
-									btn1:SimpleButton = null, btn2:SimpleButton = null)
+									btnNegative:SimpleButton = null, btnPositive:SimpleButton = null,
+									valueMin:Number = 1, valueMax:Number = 10,
+									vec:Number = 1)
 		{
-			super(container, name, type, thumbName, trackName);
+			super(container, name, type, thumbName, trackName);			
 
-			_btn1 = btn1;
-			_btn2 = btn2;
-			_btn1.addEventListener(MouseEvent.MOUSE_DOWN, p_mouseDown);
-			_btn2.addEventListener(MouseEvent.MOUSE_DOWN, p_mouseDown);
+			this.addEventListener(MouseEvent.MOUSE_MOVE, p_mouseMove);
+			
+			_btnNegative = btnNegative;
+			_btnPositive = btnPositive;
+			_btnNegative.addEventListener(MouseEvent.MOUSE_DOWN, p_mouseDown);
+			_btnPositive.addEventListener(MouseEvent.MOUSE_DOWN, p_mouseDown);
+			
+			_valueMin = valueMin;
+			_valueMax = valueMax;
+			_valueSize = _valueMax - _valueMin;
+			_value = _valueMin;
+			_vec = vec;
 		}
 		
-		private var _btn1:SimpleButton = null;
-		private var _btn2:SimpleButton = null;
+		private var _btnNegative:SimpleButton = null;
+		public function get_btnNegative():SimpleButton
+		{
+			return _btnNegative;
+		}		
+		
+		private var _btnPositive:SimpleButton = null;
+		public function get_btnPositive():SimpleButton
+		{
+			return _btnPositive;
+		}
+		
 		private var _btnTemp:SimpleButton = null;
+		
+		private var _valueMin:Number;
+		public function get_valueMin():Number
+		{
+			return _valueMin;
+		}
+		
+		private var _valueMax:Number;
+		public function get_valueMax():Number
+		{
+			return _valueMax;
+		}		
+		
+		private var _valueSize:Number;
+		public function get_valueSize():Number
+		{
+			return _valueSize;
+		}		
+		
+		private var _value:Number;
+		public function get_value():Number
+		{
+			return _value;
+		}
+		private var _vec:Number;
+		public function get_vec():Number
+		{
+			return _vec;
+		}
 		
 		
 		private function p_checkOut():void
 		{
-			if (_btnTemp == _btn1)
+			// Scroll Minus
+			if (_btnTemp == _btnNegative)
 			{
-				this.dispatchEvent(new ScrollBarEvent(ScrollBarEvent.SCROLL_UP));
+				if (_value > _valueMin)
+				{
+					_value -= _vec;
+					if (_value < _valueMin)
+						_value = _valueMin;
+				}
 			}
 			else
-			if (_btnTemp == _btn2)
+			// Scroll Plus
+			if (_btnTemp == _btnPositive)
 			{
-				this.dispatchEvent(new ScrollBarEvent(ScrollBarEvent.SCROLL_DOWN));
+				if (_value < _valueMax)
+				{
+					_value += _vec;
+					if (_value > _valueMax)
+						_value = _valueMax;
+				}
 			}
+			
+			var t_r:Number = (_value - _valueMin) / _valueSize;
+			this.set_ratio(t_r);
+			
+			this.dispatchEvent(new Event(Event.SCROLL));
 		}		
 		
 		private var _downCountEnd:uint = 10;
@@ -68,6 +136,14 @@ package hbworks.whats
 				return;
 			}
 			p_checkOut();
+		}
+		
+		// ::
+		private function p_mouseMove(event:MouseEvent):void
+		{
+			_value = Math.round(_valueMin + (_valueSize * this.get_ratio()));
+			
+			this.dispatchEvent(new Event(Event.SCROLL));
 		}
 		
 		// ::
@@ -92,10 +168,13 @@ package hbworks.whats
 		// ::
 		override public function dispose():void 
 		{
-			if (_btn1 == null) return;
+			if (_btnNegative == null) return;
 			p_mouseUp(null);
-			_btn1 = null;
-			_btn2 = null;
+			this.removeEventListener(MouseEvent.MOUSE_MOVE, p_mouseMove);
+			_btnNegative.removeEventListener(MouseEvent.MOUSE_DOWN, p_mouseDown);
+			_btnPositive.removeEventListener(MouseEvent.MOUSE_DOWN, p_mouseDown);			
+			_btnNegative = null;
+			_btnPositive = null;
 			super.dispose();
 		}		
 		
