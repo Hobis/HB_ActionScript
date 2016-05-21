@@ -42,7 +42,7 @@ package hb.utils
 
 			for (i = 0; i < t_la; i ++)
 			{
-				if (target[i] == value)
+				if (target[i] === value)
 				{
 					t_rv = true;
 					break;
@@ -195,6 +195,49 @@ package hb.utils
 
 				i ++;
 			}
+		}
+		
+		
+		// :: [Array]배열 요소 삭제
+		public static function remove(target:Array, value:Object):void
+		{
+			for (
+				var i:uint = 0,
+					t_la:uint = target.length;
+				i < t_la; i++)
+			{
+				if (target[i] === value)
+				{
+					target.splice(i, 1);
+					break;
+				}
+			}
+		}
+		
+		// :: [Array]배열 요소 삭제
+		public static function removeAt(target:Array, i:uint):void
+		{
+			target.splice(i, 1);
+		}
+		
+		// :: [Array]배열 요소 인덱스
+		public static function get_index(target:Array, value:Object):int
+		{
+			var t_rv:int = -1;
+			
+			for (
+				var i:int = 0,
+					t_la:int = target.length;
+				i < t_la; i++)
+			{
+				if (target[i] === value)
+				{
+					t_rv = i;
+					break;
+				}
+			}
+			
+			return t_rv;
 		}
 	}
 

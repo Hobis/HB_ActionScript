@@ -9,5 +9,7 @@ REM SWC Making...
 
 ::D:\01_hbworks\_FLEX_SDK\bin\acompc.bat -output .\bin\hb_newedge_160510.swc -include-sources .\src
 ::D:\01_hbworks\_FLEX_SDK\bin\acompc.bat -output .\bin\hb_newedge_160511.swc -include-sources .\src
-D:\01_hbworks\_FLEX_SDK\bin\acompc.bat -output .\bin\hb_newedge_160512.swc -include-sources .\src
+::D:\01_hbworks\_FLEX_SDK\bin\acompc.bat -output .\bin\hb_newedge_160512.swc -include-sources .\src
+::D:\01_hbworks\_FLEX_SDK\bin\acompc.bat -output .\bin\hb_newedge_160518.swc -include-sources .\src
+D:\01_hbworks\_FLEX_SDK\bin\acompc.bat -output .\bin\hb_newedge_160519.swc -include-sources .\src
 PAUSE
