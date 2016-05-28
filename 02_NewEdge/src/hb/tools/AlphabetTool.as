@@ -16,14 +16,19 @@ package hb.tools
 			return _str;
 		}
 
-		public static function get_index(v:String):int
+		public static function get_indexOf(v:String):int
 		{
 			return _str.indexOf(v);
 		}
 		
+		public static function get_charAt(i:int):String
+		{
+			return _str.charAt(i);
+		}
+		
 		public static function is_val(v:String):Boolean
 		{
-			return (get_index(v) > -1);
+			return (get_indexOf(v) > -1);
 		}
 		
 
