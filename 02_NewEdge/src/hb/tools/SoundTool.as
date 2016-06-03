@@ -31,7 +31,7 @@ package hb.tools
 			var t_mc:MovieClip = p_find_clip(omc, clipName);
 			if (t_mc == null) return;
 			//
-			t_mc.gotoAndStop('#_0');
+			t_mc.gotoAndStop(1);
 			//
 			MovieClipUtil.delayExcute_stop(t_mc);
 		}
@@ -46,7 +46,7 @@ package hb.tools
 			var t_st:SoundTransform = new SoundTransform();
 			t_st.volume = vol;			
 			t_mc.soundTransform = t_st;
-			t_mc.gotoAndStop('#_0');
+			t_mc.gotoAndStop(1);
 			if (isGotoStop)
 				t_mc.gotoAndStop(label);
 			else
