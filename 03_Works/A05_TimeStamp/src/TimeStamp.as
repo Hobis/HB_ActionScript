@@ -67,9 +67,9 @@ function p_ef(event:Event):void
 
 var owner:MovieClip = this;
 var _nw:NativeWindow = owner.stage.nativeWindow;
-_nw.title = 'TimeStamp  Ver 1.02';
-_nw.x = 80;
-_nw.y = 80;
+_nw.title = 'TimeStamp  Ver 1.07';
+_nw.x = Math.round(Capabilities.screenResolutionX - _nw.width) - 40;
+_nw.y = Math.round(Capabilities.screenResolutionY - _nw.height) - 40;
 var _tf0:TextField = owner.tf_0;
 var _tf1:TextField = owner.tf_1;
 var _b:Boolean = false;
