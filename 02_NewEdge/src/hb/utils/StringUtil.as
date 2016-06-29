@@ -54,8 +54,8 @@ package hb.utils
 			var t_rv:String = target;
 			//var t_regBegin:RegExp = new RegExp('^\\s*');
 			//var t_regEnd:RegExp = new RegExp('\\s*$');
-			const t_regBegin:RegExp = /^\s*/;
-			const t_regEnd:RegExp = /^\s*$/;
+			const t_regBegin:RegExp = /^\s+/;
+			const t_regEnd:RegExp = /\s+$/;
 
 			if (type == 'b')
 			{

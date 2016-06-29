@@ -121,6 +121,12 @@ package hbworks.uilogics
 				_selectIndex = -1;
 			}
 		}
+		
+		// ::
+		public function unselect():void
+		{
+			p_unSelectedIndex();
+		}		
 
 		// :: SetSelectedIndex
 		private function p_setSelectedIndex(index:int, isEvent:Boolean = false):void
