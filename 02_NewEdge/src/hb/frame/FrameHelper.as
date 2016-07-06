@@ -171,7 +171,7 @@ package hb.frame
 							beginFrame:int, endFrame:int,
 							isStop:Boolean = false):void
 		{
-			if (beginFrame >= endFrame) return;			
+			if (beginFrame >= endFrame) return;
 			_beginFrame = beginFrame;
 			_endFrame = endFrame;
 			_isStop = isStop;
@@ -179,6 +179,7 @@ package hb.frame
 			//p_checkEnterFrame(null);
 			if (_beginFrame < 1) {
 				_target.gotoAndPlay(_target.currentFrame);
+				//_target.play();
 			}
 			else {
 				_target.gotoAndPlay(_beginFrame);
@@ -194,7 +195,7 @@ package hb.frame
 			var t_bf:int = MovieClipUtil.get_frameLabelToFrame(_target, beginFrameLabel);
 			var t_ef:int = MovieClipUtil.get_frameLabelToFrame(_target, endFrameLabel);
 			if (t_bf >= t_ef) return;
-			if (t_ef < 1) return;			
+			if (t_ef < 1) return;
 			
 			_beginFrameLabel = beginFrameLabel;
 			_endFrameLabel = endFrameLabel;
@@ -210,6 +211,25 @@ package hb.frame
 				gotoPlay(t_bf, t_ef, isStop);				
 			}
 		}
+		
+		
+		
+		
+		
+		// :: 
+		public function gotoPlayEnd(
+							beginFrame:int,
+							isStop:Boolean = false):void
+		{
+			this.gotoPlay(beginFrame, _target.totalFrames, isStop);
+		}
+		
+		// :: 
+		public function playEnd(isStop:Boolean = false):void
+		{
+			this.gotoPlay(_target.currentFrame, _target.totalFrames, isStop);
+		}		
+		
 		//}}}
 		////////////////////////////////////////////////////////////////////////////////////////////////////
 	}
