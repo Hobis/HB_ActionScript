@@ -35,18 +35,14 @@ package hbworks.uilogics
 
 		// :: 생성자
 		public function SliderFrameLogic(
-								targetCont:MovieClip, type:String, scrollMargin:Number,
-									name:String = null)
+							targetCont:MovieClip, type:String, 
+							scrollBasePos:Number, scrollSize:Number,
+							name:String = null)
 		{
 			_targetCont = targetCont;
-			_type = type;
-			_scrollMargin = scrollMargin;
-			if (_type == TYPE_HORIZONTAL)
-				_scrollSize = _targetCont.width - (_scrollMargin + _scrollMargin);
-			else
-			if (_type == TYPE_VERTICAL)
-				_scrollSize = _targetCont.height - (_scrollMargin + _scrollMargin);
-			
+			_type = type;			
+			_scrollBasePos = scrollBasePos;
+			_scrollSize = scrollSize;
 			_name = name;
 			_stage = _targetCont.stage;
 			p_init_once();
@@ -88,13 +84,13 @@ package hbworks.uilogics
 			var t_ratio:Number;
 			if (_type == TYPE_HORIZONTAL)
 			{
-				t_v = _targetCont.mouseX - _scrollMargin;
+				t_v = _targetCont.mouseX - _scrollBasePos;
 				t_ratio = t_v / _scrollSize;
 			}
 			else
 			if (_type == TYPE_VERTICAL)
 			{
-				t_v = _targetCont.mouseY - _scrollMargin;
+				t_v = _targetCont.mouseY - _scrollBasePos;
 				t_ratio = t_v / _scrollSize;
 			}
 
@@ -158,7 +154,7 @@ package hbworks.uilogics
 		
 
 		// - 
-		private var _scrollMargin:Number;
+		private var _scrollBasePos:Number;		
 		// -
 		private var _scrollSize:Number;
 		

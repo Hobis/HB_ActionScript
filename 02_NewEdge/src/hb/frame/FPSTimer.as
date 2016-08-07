@@ -76,7 +76,7 @@ package hb.frame
 		}
 		public function set_delayFrame(v:int):void
 		{
-			_delayFrame = (v < 1) ? 1 : v;
+			_delayFrame = (v < 0) ? 0 : v;
 		}
 		
 		// - 현재 프래임

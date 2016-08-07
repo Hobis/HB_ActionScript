@@ -62,9 +62,12 @@ package hbworks.uilogics
 			var t_blIndex:int = StringUtil.get_lastNum2(t_bl.name);
 
 			p_setSelectedIndex(t_blIndex, true);
+			
+			if (event != null)
+				this.dispatchEvent(event);
 
 			//DebugUtil.test('p_item_click');
-			//DebugUtil.test('t_blIndex: ' + t_blIndex);
+			//DebugUtil.test('t_blIndex: ' + t_blIndex);			
 		}
 
 		// :: 객체 활성화 설정

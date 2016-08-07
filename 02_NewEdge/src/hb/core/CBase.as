@@ -27,6 +27,7 @@ package hb.core
 		public function dispatch_callBack(eObj:Object):void
 		{
 			if (_callBack == null) return;
+			eObj.target = this;
 			_callBack(eObj);
 		}
 		public function set_callBack(f:Function):void

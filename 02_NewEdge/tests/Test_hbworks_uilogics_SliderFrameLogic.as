@@ -11,7 +11,7 @@ import hb.tools.TxtTool;
 
 var owner:MovieClip = this;
 var _slf1:SliderFrameLogic = 
-	new SliderFrameLogic(owner.slf_1, SliderFrameLogic.TYPE_HORIZONTAL, 17);
+	new SliderFrameLogic(owner.slf_1, SliderFrameLogic.TYPE_HORIZONTAL, 17, 166);
 _slf1.set_callBack(function(eObj:Object):void {
 	trace(eObj.type);
 	trace('_slf1.get_ratio(): ' + _slf1.get_ratio());
@@ -20,13 +20,13 @@ _slf1.set_callBack(function(eObj:Object):void {
 });
 
 var _slf2:SliderFrameLogic = 
-	new SliderFrameLogic(owner.slf_2, SliderFrameLogic.TYPE_VERTICAL, 17);
+	new SliderFrameLogic(owner.slf_2, SliderFrameLogic.TYPE_VERTICAL, -173, 166);
 _slf2.set_callBack(function(eObj:Object):void {
 	TxtTool.set('2', _slf2.get_ratio().toString());
 });
 
 var _slf3:SliderFrameLogic = 
-	new SliderFrameLogic(owner.slf_3, SliderFrameLogic.TYPE_VERTICAL, 17);
+	new SliderFrameLogic(owner.slf_3, SliderFrameLogic.TYPE_VERTICAL, 0, 290);
 _slf3.set_callBack(function(eObj:Object):void {
 	TxtTool.set('3', _slf3.get_ratio().toString());
 });
