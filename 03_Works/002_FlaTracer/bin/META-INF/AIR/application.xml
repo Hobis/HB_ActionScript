@@ -21,8 +21,8 @@
 		<transparent>false</transparent>
 		<visible>true</visible>
 		<minimizable>true</minimizable>
-		<maximizable>false</maximizable>
-		<resizable>false</resizable>
+		<maximizable>true</maximizable>
+		<resizable>true</resizable>
 <!--
 		<width>500</width>
 		<height>500</height>
